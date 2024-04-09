@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:currency_converter/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class _CurrencyListPageState extends State<CurrencyListPage> {
     @override
     Widget build(BuildContext context) {
         ExchangeProvider state = Provider.of<ExchangeProvider>(context);
+        double padding = Provider.of<ThemeProvider>(context).padding;
 
         return CupertinoPageScaffold(
             navigationBar: const CupertinoNavigationBar(
@@ -43,7 +45,8 @@ class _CurrencyListPageState extends State<CurrencyListPage> {
                             callback: () {
                                 state.chooseCurrency(widget.choice, currencies[index].code);
                                 Navigator.pop(context);
-                            }
+                            },
+                            index: index
                         );
                     },
                 ),

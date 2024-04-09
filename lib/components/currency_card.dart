@@ -25,14 +25,18 @@ class CurrencyCard extends StatelessWidget {
         Color color = isDarkMode ? const Color.fromARGB(255, 15, 17, 18) : const Color.fromARGB(255, 255, 255, 255);
         Color textColor = isDarkMode ? Colors.white : Colors.black;
 
-        return Expanded(
-            flex: 1,
-            child: Padding(
-                padding: const EdgeInsets.only(left: 4, right: 4, bottom: 2, top: 4),
+        double padding = Provider.of<ThemeProvider>(context).padding;
+
+        return Padding(
+                padding: EdgeInsets.symmetric(horizontal: padding),
                 child: SizedBox(
                     width: double.infinity,
                     child: CupertinoButton(
-                        padding: const EdgeInsets.all(10),
+                        borderRadius: BorderRadius.circular(10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: padding*1.5,
+                            vertical: padding*2.5
+                        ),
                         color: color,
                         onPressed: () => navigate(),
                         child: Row(
@@ -57,7 +61,6 @@ class CurrencyCard extends StatelessWidget {
                         )
                     ),
                 ),
-            ),
         );
     }
 }
