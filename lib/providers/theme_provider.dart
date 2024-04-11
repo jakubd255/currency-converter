@@ -11,6 +11,9 @@ class ThemeProvider extends ChangeNotifier {
     int _primaryColorIndex = 0;
     int get colorIndex => _primaryColorIndex;
 
+    final double _padding = 8;
+    double get padding => _padding;
+
     final List<Color> colors = <Color>[
         CupertinoColors.activeBlue,
         CupertinoColors.activeGreen,

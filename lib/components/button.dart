@@ -72,17 +72,20 @@ class MyButton extends StatelessWidget{
             }
         }
 
+        double padding = Provider.of<ThemeProvider>(context).padding;
+
         return(
             Expanded(
                 flex: flex,
                 child: Padding(
-                    padding: const EdgeInsets.all(2),
+                    padding: EdgeInsets.all(padding/2),
                     child: CupertinoButton(
                         padding: EdgeInsets.zero,
                         onPressed: () => callback(),
                         color: getColor(),
-                        minSize: 65,
-                        child: getButtonContent(),
+                        child: Center(
+                            child: getButtonContent(),
+                        ), 
                     ),
                 ),
             )

@@ -1,4 +1,5 @@
 import 'package:currency_converter/providers/exchange_provider.dart';
+import 'package:currency_converter/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import '../providers/numpad_provider.dart';
@@ -19,11 +20,13 @@ class _HomePageState extends State<HomePage> {
     Widget build(BuildContext context) {
         ExchangeProvider exchange = Provider.of<ExchangeProvider>(context);
         NumpadProvider numpad = Provider.of<NumpadProvider>(context);
+        double padding = Provider.of<ThemeProvider>(context).padding;
 
         return CupertinoPageScaffold(
             child: SafeArea(
                 child: Column(
                     children: <Widget>[
+                        SizedBox(height: padding),
                         CurrencyCard(
                             currency: exchange.from,
                             amount: numpad.displayedNum,
@@ -31,6 +34,7 @@ class _HomePageState extends State<HomePage> {
                                 navigateCurrencyList("from");
                             }
                         ),
+                        SizedBox(height: padding),
                         CurrencyCard(
                             currency: exchange.to,
                             amount: exchange.convert(double.parse(numpad.displayedNum)),
@@ -38,8 +42,9 @@ class _HomePageState extends State<HomePage> {
                                 navigateCurrencyList("to");
                             }
                         ),
+                        SizedBox(height: padding),
                         const Numpad(),
-                        const Footer()
+                        const Footer(),
                     ],
                 )
             ),
