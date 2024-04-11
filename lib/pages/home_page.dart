@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             child: SafeArea(
                 child: Column(
                     children: <Widget>[
-                        const SizedBox(height: 10),
+                        SizedBox(height: padding),
                         CurrencyCard(
                             currency: exchange.from,
                             amount: numpad.displayedNum,
@@ -42,11 +42,9 @@ class _HomePageState extends State<HomePage> {
                                 navigateCurrencyList("to");
                             }
                         ),
-                        SizedBox(height: padding*2),
+                        SizedBox(height: padding),
                         const Numpad(),
-                        const SizedBox(height: 10),
                         const Footer(),
-                        const SizedBox(height: 10),
                     ],
                 )
             ),

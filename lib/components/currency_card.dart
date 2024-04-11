@@ -35,7 +35,7 @@ class CurrencyCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         padding: EdgeInsets.symmetric(
                             horizontal: padding*1.5,
-                            vertical: padding*2.5
+                            vertical: padding*3.5
                         ),
                         color: color,
                         onPressed: () => navigate(),
