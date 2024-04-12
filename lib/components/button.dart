@@ -72,7 +72,7 @@ class MyButton extends StatelessWidget{
             }
         }
 
-        double padding = Provider.of<ThemeProvider>(context).padding;
+        double padding = Provider.of<ThemeProvider>(context, listen: false).padding;
 
         return(
             Expanded(

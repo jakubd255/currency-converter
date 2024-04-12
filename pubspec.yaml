@@ -19,6 +19,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider:
   dio:
+  hive:
+  hive_flutter:
+  connectivity:
 
 
 

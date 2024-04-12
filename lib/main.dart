@@ -3,9 +3,13 @@ import 'package:currency_converter/providers/exchange_provider.dart';
 import 'package:currency_converter/providers/numpad_provider.dart';
 import 'package:currency_converter/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+    await Hive.initFlutter();
+    await Hive.openBox("myBox");
+
     runApp(
         MultiProvider(
             providers: [
@@ -39,8 +43,7 @@ class _MyAppState extends State<MyApp> {
         super.didChangeDependencies();
 
         if(_isLoading) {
-            context.read<ThemeProvider>().initialize(context);
-            context.read<ExchangeProvider>().initialize();
+            context.read<ExchangeProvider>().initialize(context);
             _isLoading = false;
         }
     }
