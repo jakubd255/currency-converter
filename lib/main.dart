@@ -61,11 +61,11 @@ class _MyAppState extends State<MyApp> {
                 brightness: theme.getBrightness(context),
                 textTheme: CupertinoTextThemeData(
                     textStyle: TextStyle(
-                        color: textColor
+                        color: textColor,
                     ),
+                    primaryColor: theme.themeColor.primary
                 ),
             ),
-            //themeMode: Provider.of<ThemeProvider>(context).themeMode,
             home: const HomePage(),
         );
     }
