@@ -2,6 +2,7 @@ import 'package:currency_converter/pages/home_page.dart';
 import 'package:currency_converter/providers/exchange_provider.dart';
 import 'package:currency_converter/providers/numpad_provider.dart';
 import 'package:currency_converter/providers/theme_provider.dart';
+import 'package:currency_converter/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ void main() async {
         MultiProvider(
             providers: [
                 ChangeNotifierProvider<ThemeProvider>(
-                    create: (context) => ThemeProvider(context),
+                    create: (context) => ThemeProvider(),
                 ),
                 ChangeNotifierProvider<ExchangeProvider>(
                     create: (context) => ExchangeProvider(context),
@@ -50,17 +51,21 @@ class _MyAppState extends State<MyApp> {
 
     @override
     Widget build(BuildContext context) {
+        final theme = Provider.of<ThemeProvider>(context);
         return CupertinoApp(
             debugShowCheckedModeBanner: false,
             title: "Currency Converter",
             theme: CupertinoThemeData(
-                primaryColor: Provider.of<ThemeProvider>(context).primaryColor,
-                scaffoldBackgroundColor: const CupertinoDynamicColor.withBrightness(
-                    color: Color.fromARGB(255, 240, 240, 240),
-                    darkColor: Color.fromARGB(255, 35, 35, 35),
+                scaffoldBackgroundColor: primaryColor,
+                primaryColor: theme.themeColor.primary,
+                brightness: theme.getBrightness(context),
+                textTheme: CupertinoTextThemeData(
+                    textStyle: TextStyle(
+                        color: textColor
+                    ),
                 ),
-                brightness: Provider.of<ThemeProvider>(context).isDarkMode ? Brightness.dark : Brightness.light,
             ),
+            //themeMode: Provider.of<ThemeProvider>(context).themeMode,
             home: const HomePage(),
         );
     }

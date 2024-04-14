@@ -1,8 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:currency_converter/pages/settings_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../pages/settings_page.dart';
+//import '../pages/settings_page.dart';
 import '../providers/exchange_provider.dart';
 import 'package:provider/provider.dart';
 
