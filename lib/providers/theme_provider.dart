@@ -12,7 +12,7 @@ class ThemeProvider extends ChangeNotifier {
     late String _choice;
     String get choice => _choice;
 
-    int _colorIndex = 0;
+    late int _colorIndex;
     int get colorIndex => _colorIndex;
 
     ThemeColor get themeColor => themeColors[_colorIndex];
@@ -20,6 +20,7 @@ class ThemeProvider extends ChangeNotifier {
 
     ThemeProvider() {
         _choice = box.get("darkMode", defaultValue: "system");
+        _colorIndex = box.get("colorIndex", defaultValue: 0);
     }
 
     void setBrightness(String choice) {
@@ -38,6 +39,7 @@ class ThemeProvider extends ChangeNotifier {
 
     void setColor(int index) {
         _colorIndex = index;
+        box.put("colorIndex", index);
         notifyListeners();
     }
 }

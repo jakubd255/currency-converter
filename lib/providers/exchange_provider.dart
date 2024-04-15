@@ -1,8 +1,8 @@
 import 'package:currency_converter/constants/initial_offline_rates.dart';
-import 'package:currency_converter/functions/check_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../functions/format_number.dart';
 
 class ExchangeProvider extends ChangeNotifier {
@@ -35,7 +35,7 @@ class ExchangeProvider extends ChangeNotifier {
     ExchangeProvider(BuildContext context);
 
     void initialize(BuildContext context) async {
-        _isConnected = await checkConnection();
+        _isConnected = await InternetConnectionChecker().hasConnection;
 
         if(_isConnected) {
             final response = await Dio().get("https://api.frankfurter.app/latest?from=USD");

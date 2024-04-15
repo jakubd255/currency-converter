@@ -21,7 +21,9 @@ dependencies:
   dio:
   hive:
   hive_flutter:
-  connectivity:
+  internet_connection_checker:
+  path_provider:
+  path_provider_foundation:
 
 
 dev_dependencies:
@@ -31,7 +33,7 @@ dev_dependencies:
 
 
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.2
 
 
 
