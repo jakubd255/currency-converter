@@ -7,6 +7,7 @@ Written in Flutter, as a project for Programming Window and Mobile Application c
 - Calculator
 - Actual exchange rates from [Frankfurter API](https://www.frankfurter.app/).
 - Light and dark mode, color themes
+- Saving theme settings and currency choice in the local storage
 
 
 ## Screenshots

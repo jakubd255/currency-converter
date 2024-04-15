@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:currency_converter/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../providers/theme_provider.dart';
@@ -23,30 +24,18 @@ class MyButton extends StatelessWidget{
 
     @override
     Widget build(BuildContext context) {        
-        bool isDarkMode =  Provider.of<ThemeProvider>(context).isDarkMode;
-
-        Color primaryColor = CupertinoTheme.of(context).primaryColor;
-        Color textColor = isDarkMode ? Colors.white : Colors.black;
-
-        Color getBrighterColor(Color originalColor) {
-            return CupertinoDynamicColor.withBrightness(
-                color: originalColor.withOpacity(0.7),
-                darkColor: originalColor.withOpacity(0.7),
-            );
-        }
+        ThemeColor themeColor = Provider.of<ThemeProvider>(context).themeColor;
+        Color? systemTextColor = CupertinoTheme.of(context).textTheme.textStyle.color;
 
         Color getColor(){
             if(type == "operator") {
-                return primaryColor;
+                return themeColor.primary;
             }
             else if(type == "special") {
-                return getBrighterColor(primaryColor);
-            }
-            else if(isDarkMode) {
-                return const Color.fromARGB(255, 15, 17, 18);
+                return themeColor.secondary;
             }
             else {
-                return Colors.white;
+                return secondaryColor;
             }
         }
 
@@ -55,7 +44,7 @@ class MyButton extends StatelessWidget{
                 return Text(
                     text!,
                     style: TextStyle(
-                        color: ["special", "operator"].contains(type) ? Colors.white : textColor,
+                        color: ["special", "operator"].contains(type) ? Colors.white : systemTextColor,
                         fontSize: 25
                     )
                 );

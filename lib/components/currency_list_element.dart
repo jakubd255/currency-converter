@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:currency_converter/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import '../providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'flag.dart';
@@ -22,11 +22,8 @@ class CurrencyListElement extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        bool isDarkMode =  Provider.of<ThemeProvider>(context).isDarkMode;
         double padding = Provider.of<ThemeProvider>(context).padding;
-        
-        Color color = isDarkMode ? const Color.fromARGB(255, 15, 17, 18) : const Color.fromARGB(255, 255, 255, 255);
-        Color textColor = isDarkMode ? Colors.white : Colors.black;
+        Color? systemTextColor = CupertinoTheme.of(context).textTheme.textStyle.color;
         
 
         return Padding(
@@ -39,7 +36,7 @@ class CurrencyListElement extends StatelessWidget {
             child: CupertinoButton(
                 onPressed: () => callback(),
                 padding: const EdgeInsets.all(10),
-                color: color,
+                color: secondaryColor,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -47,14 +44,17 @@ class CurrencyListElement extends StatelessWidget {
                             children: <Widget>[
                                 Flag(code: code),
                                 const SizedBox(width: 20),
-                                Text(name, style: TextStyle(color: textColor))
+                                Text(
+                                    name, 
+                                    style: TextStyle(color: systemTextColor)
+                                )
                             ],
                         ),
                         Text(
                             code,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: textColor
+                                color: systemTextColor
                             )
                         )
                     ],

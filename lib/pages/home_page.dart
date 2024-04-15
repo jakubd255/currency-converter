@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
         return CupertinoPageScaffold(
             child: SafeArea(
-                child: Column(
+                child: exchange.isLoaded ? Column(
                     children: <Widget>[
                         SizedBox(height: padding),
                         CurrencyCard(
@@ -46,6 +46,8 @@ class _HomePageState extends State<HomePage> {
                         const Numpad(),
                         const Footer(),
                     ],
+                ) : const Center(
+                    child: Text("Loading ..."),
                 )
             ),
         );

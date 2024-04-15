@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:currency_converter/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import '../providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'flag.dart';
@@ -20,12 +20,9 @@ class CurrencyCard extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        bool isDarkMode =  Provider.of<ThemeProvider>(context).isDarkMode;
-
-        Color color = isDarkMode ? const Color.fromARGB(255, 15, 17, 18) : const Color.fromARGB(255, 255, 255, 255);
-        Color textColor = isDarkMode ? Colors.white : Colors.black;
-
         double padding = Provider.of<ThemeProvider>(context).padding;
+
+        Color? systemTextColor = CupertinoTheme.of(context).textTheme.textStyle.color;
 
         return Padding(
                 padding: EdgeInsets.symmetric(horizontal: padding),
@@ -37,8 +34,8 @@ class CurrencyCard extends StatelessWidget {
                             horizontal: padding*1.5,
                             vertical: padding*3.5
                         ),
-                        color: color,
                         onPressed: () => navigate(),
+                        color: secondaryColor,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -47,14 +44,17 @@ class CurrencyCard extends StatelessWidget {
                                     children: [
                                         Flag(code: currency),
                                         const SizedBox(height: 10),
-                                        Text(currency, style: TextStyle(color: textColor)),
+                                        Text(
+                                            currency, 
+                                            style: TextStyle(color: systemTextColor)
+                                        ),
                                     ],
                                 ),
                                 Text(
                                     amount,
                                     style: TextStyle(
                                         fontSize: amount.length < 15 ? 35 : 20,
-                                        color: textColor,
+                                        color: systemTextColor
                                     ),
                                 )
                             ],

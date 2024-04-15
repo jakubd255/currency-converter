@@ -1,3 +1,4 @@
+import 'package:currency_converter/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,30 @@ class SettingsPage extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         final theme = Provider.of<ThemeProvider>(context);
+
+        Icon getThemeChoiceIcon(String choice) {
+            if(theme.choice == choice) {
+                return const Icon(Icons.check_circle);
+            }
+            else {
+                return const Icon(
+                    Icons.radio_button_unchecked, 
+                    color: Colors.grey
+                );
+            }
+        }
+
+        Icon getColorChoiceIcon(int index) {
+            if(theme.colorIndex == index) {
+                return const Icon(Icons.check_circle);
+            }
+            else {
+                return Icon(
+                    Icons.circle,
+                    color: themeColors[index].primary
+                );
+            }
+        }
 
         return(
             CupertinoPageScaffold(
@@ -27,27 +52,27 @@ class SettingsPage extends StatelessWidget {
                                 children: <CupertinoListTile>[
                                     CupertinoListTile(
                                         onTap: (){
-                                            theme.setTheme("auto", context);
+                                            theme.setBrightness("system");
                                         },
                                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                                        title: const Text("Automatic"),
-                                        leading: getThemeChoiceIcon(theme, "auto")
+                                        title: const Text("System"),
+                                        leading: getThemeChoiceIcon("system")
                                     ),
                                     CupertinoListTile(
                                         onTap: (){
-                                            theme.setTheme("light", context);
+                                            theme.setBrightness("light");
                                         },
                                         padding: const EdgeInsets.symmetric(horizontal: 10),
                                         title: const Text("Light"),
-                                        leading: getThemeChoiceIcon(theme, "light")
+                                        leading: getThemeChoiceIcon("light")
                                     ),
                                     CupertinoListTile(
                                         onTap: (){
-                                            theme.setTheme("dark", context);
+                                            theme.setBrightness("dark");
                                         },
                                         padding: const EdgeInsets.symmetric(horizontal: 10),
                                         title: const Text("Dark"),
-                                        leading: getThemeChoiceIcon(theme, "dark")
+                                        leading: getThemeChoiceIcon("dark")
                                     ),
                                 ],
                             ),
@@ -57,14 +82,14 @@ class SettingsPage extends StatelessWidget {
                                 backgroundColor: Colors.transparent,
                                 dividerMargin: -25,
                                 children: List<CupertinoListTile>.generate(
-                                    theme.colors.length,
+                                    themeColors.length,
                                     (index) => CupertinoListTile(
                                         onTap: (){
                                             theme.setColor(index);
                                         },
                                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                                        title: Text(theme.colorNames[index]),
-                                        leading:  getColorChoiceIcon(theme, index)
+                                        title: Text(themeColors[index].name),
+                                        leading:  getColorChoiceIcon(index)
                                     )
                                 ).toList()
                             )
@@ -73,26 +98,5 @@ class SettingsPage extends StatelessWidget {
                 ),
             )
         );
-    }
-
-    Icon getThemeChoiceIcon(ThemeProvider theme, String choice) {
-        if(theme.choice == choice) {
-            return const Icon(Icons.check_circle);
-        }
-        else {
-            return const Icon(Icons.radio_button_unchecked, color: Colors.grey);
-        }
-    }
-
-    Icon getColorChoiceIcon(ThemeProvider theme, int index) {
-        if(theme.colorIndex == index) {
-            return const Icon(Icons.check_circle);
-        }
-        else {
-            return Icon(
-                Icons.circle,
-                color: theme.colors[index]
-            );
-        }
     }
 }

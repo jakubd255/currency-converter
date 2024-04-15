@@ -1,9 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
-
 import 'package:currency_converter/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-
 import '../constants/currencies.dart';
 import '../providers/exchange_provider.dart';
 import '../components/currency_list_element.dart';
